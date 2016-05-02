@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Control</string>
+    <string name="label_income">Income R$:  </string>
+    <string name="label_clean">Clean</string>
+    <string name="label_save">Save</string>
+    <string name="sum_income">Total incomes: R$</string>
+</resources>
