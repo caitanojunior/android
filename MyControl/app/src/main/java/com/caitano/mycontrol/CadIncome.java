@@ -61,8 +61,7 @@ public class CadIncome extends Activity implements TextWatcher {
                 }
 
                 try {
-                    // Transformamos o número que está escrito no EditText em
-                    // monetário.
+                    // Transformamos o número que está escrito no EditText em monetário.
                     str = nf.format(Double.parseDouble(str) / 100);
                     field_income.setText(str);
                     field_income.setSelection(field_income.getText().length());
@@ -85,7 +84,11 @@ public class CadIncome extends Activity implements TextWatcher {
     }
 
     public void sumIncome(View view) {
-
+        Editable valorCampo = field_income.getText(); //pega valor digitado
+        String antigoValor = valorCampo.toString(); //transforma em String
+        String novoValor = antigoValor.replace("R$", ""); //retira o "R$"
+        
+        System.out.println(novoValor);
     }
 
     @Override
