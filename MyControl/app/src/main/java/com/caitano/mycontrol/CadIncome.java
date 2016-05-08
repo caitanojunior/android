@@ -7,6 +7,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.text.NumberFormat;
 
@@ -84,11 +85,37 @@ public class CadIncome extends Activity implements TextWatcher {
     }
 
     public void sumIncome(View view) {
-        Editable valorCampo = field_income.getText(); //pega valor digitado
-        String antigoValor = valorCampo.toString(); //transforma em String
-        String novoValor = antigoValor.replace("R$", ""); //retira o "R$"
-        
-        System.out.println(novoValor);
+
+        Editable valueFieldIncome = field_income.getText(); //pega valor digitado
+        String oldValue = valueFieldIncome.toString(); //transforma em String
+        String newValue = oldValue.replace("R$", ""); //retira o "R$"
+
+
+        //The lines below modify the total amount
+        View parent = (View)view.getParent();
+        if (parent != null) {
+            //get value intial of the text view incomes
+            TextView txtView = (TextView) parent.findViewById(R.id.sum_income);
+            String initialValue = (String) txtView.getText(); //turn to string
+
+            //turn string to boolean
+            initialValue = initialValue.replace(".", "");//eliminates point
+            initialValue = initialValue.replace(",", ".");//replaces points with commas
+            Double initialValueDouble = Double.parseDouble(initialValue);
+
+            //get value intial of the Edit text incomes
+            newValue = newValue.replace(".", "");//eliminates point
+            newValue = newValue.replace(",", ".");//replaces points with commas
+            Double newValueDouble = Double.parseDouble(newValue);
+
+            Double totalValue = initialValueDouble + newValueDouble;
+
+            String turnDouble2String = String.valueOf(totalValue);
+            turnDouble2String = initialValue.replace(".", ",");
+
+            txtView.setText(turnDouble2String); //set new value for total incomes
+
+        }
     }
 
     @Override
