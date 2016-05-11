@@ -86,34 +86,26 @@ public class CadIncome extends Activity implements TextWatcher {
 
     public void sumIncome(View view) {
 
-        Editable valueFieldIncome = field_income.getText(); //pega valor digitado
-        String oldValue = valueFieldIncome.toString(); //transforma em String
-        String newValue = oldValue.replace("R$", ""); //retira o "R$"
-
-
         //The lines below modify the total amount
         View parent = (View)view.getParent();
         if (parent != null) {
             //get value intial of the text view incomes
             TextView txtView = (TextView) parent.findViewById(R.id.sum_income);
             String initialValue = (String) txtView.getText(); //turn to string
-
-            //turn string to boolean
-            initialValue = initialValue.replace(".", "");//eliminates point
-            initialValue = initialValue.replace(",", ".");//replaces points with commas
-            Double initialValueDouble = Double.parseDouble(initialValue);
+            Double initialValueDouble = Double.parseDouble(initialValue);//turn string to boolean
 
             //get value intial of the Edit text incomes
+            Editable valueFieldIncome = field_income.getText(); //pega valor digitado
+            String oldValue = valueFieldIncome.toString(); //transforma em String
+
+            String newValue = oldValue.replace("R$", ""); //retira o "R$"
+            System.out.println(newValue);
             newValue = newValue.replace(".", "");//eliminates point
-            newValue = newValue.replace(",", ".");//replaces points with commas
+            newValue = newValue.replace(",", ".");//replaces points with comm
             Double newValueDouble = Double.parseDouble(newValue);
 
             Double totalValue = initialValueDouble + newValueDouble;
-
-            String turnDouble2String = String.valueOf(totalValue);
-            turnDouble2String = initialValue.replace(".", ",");
-
-            txtView.setText(turnDouble2String); //set new value for total incomes
+            txtView.setText(totalValue.toString()); //set new value for total incomes
 
         }
     }
